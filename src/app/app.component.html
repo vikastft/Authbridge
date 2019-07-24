@@ -1,0 +1,62 @@
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+      <td mat-cell *matCellDef="let element"> {{element.date | date: 'dd/mm/yyyy hh:mm'}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="isMatch">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Match </th>
+      <td mat-cell *matCellDef="let element"> {{element.isMatch}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="response">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Response </th>
+      <td mat-cell *matCellDef="let element"> {{element.message}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="score">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Score </th>
+      <td mat-cell *matCellDef="let element"> {{element.score}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="image1">
+      <th mat-header-cell *matHeaderCellDef> Image 1 </th>
+      <td mat-cell *matCellDef="let element">
+        <a href="{{element.image1 ||  'assets/images/no-image.png'}}" target="_blank">
+          <img class="image-size" [src]="element.image1" alt="Image1"
+            onerror="this.onerror=null;this.src='assets/images/no-image.png';" />
+        </a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="image2">
+      <th mat-header-cell *matHeaderCellDef> Image 2 </th>
+      <td mat-cell *matCellDef="let element">
+        <a href="{{element.image2 ||  'assets/images/no-image.png'}}" target="_blank">
+          <img class="image-size" [src]="element.image2" alt="Image2"
+            onerror="this.onerror=null;this.src='assets/images/no-image.png';" />
+        </a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
